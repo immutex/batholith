@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Worldgen spec
+    url: https://github.com/immutex/batholith/blob/main/docs/worldgen.md
+    about: Where the numbers come from, and what is deliberately out of scope.
+  - name: Benchmark methodology
+    url: https://github.com/immutex/batholith/blob/main/docs/benchmark.md
+    about: What is measured, on what, and which comparisons are valid.
+  - name: Contributing guide
+    url: https://github.com/immutex/batholith/blob/main/CONTRIBUTING.md
+    about: Build steps, code style, and the rules for a performance claim.

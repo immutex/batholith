@@ -1,0 +1,67 @@
+name: Bug report
+description: Generation disagrees with vanilla, the tool misbehaves, or a doc is wrong.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. The two things that make a terrain bug reproducible are the seed
+        and the chunk coordinate, so please include both if you have them.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you observed, and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: The exact command you ran, and its output.
+      render: shell
+      placeholder: |
+        ./build/release/batholith gen --seed 0 --chunks 256 --threads 12 --dump
+    validations:
+      required: true
+
+  - type: input
+    id: seed
+    attributes:
+      label: Seed and chunk coordinate
+      description: Required for a terrain mismatch.
+      placeholder: "seed 0, chunk (0, 0)"
+
+  - type: input
+    id: compiler
+    attributes:
+      label: Compiler, version and flags
+      placeholder: "GCC 16.1.0, -O3 -march=native"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: "Windows 11, x86-64"
+    validations:
+      required: true
+
+  - type: textarea
+    id: perf
+    attributes:
+      label: Benchmark numbers
+      description: |
+        Only for a performance report. Include the range over repeated runs, and say which
+        pipeline stages the number covers. See the benchmark rules in CONTRIBUTING.md.
+      render: text
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Sanitizer output, a stack trace, or a screenshot.

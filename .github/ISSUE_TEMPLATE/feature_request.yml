@@ -1,0 +1,41 @@
+name: Feature request
+description: Propose a change to the generator, the tool, or the benchmarks.
+title: "[feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        batholith has a deliberately narrow scope. Before filing, check "Known deviations" in
+        [docs/worldgen.md](https://github.com/immutex/batholith/blob/main/docs/worldgen.md).
+        Rendering, gameplay, lighting and serialization are out of scope by design.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is missing or wrong today
+      description: Describe the gap, not the solution.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would like to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: How this fits the scope
+      description: |
+        If it touches a known deviation, say so. If it adds a dependency to the library, explain
+        why that is worth it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered

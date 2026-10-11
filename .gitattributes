@@ -1,0 +1,18 @@
+# Normalize text to LF in the repository, whatever the platform.
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF so they run without a shebang rewrite.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary assets are never touched.
+*.png binary
+*.jpg binary
+*.ico binary
+*.ppm binary
+
+# Git's own diff and language detection.
+*.cxx diff=cpp
+*.hxx diff=cpp
+*.c   diff=c
+*.h   diff=c

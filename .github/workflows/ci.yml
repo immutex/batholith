@@ -1,0 +1,63 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: gcc
+            os: ubuntu-latest
+            cc: gcc
+            cxx: g++
+          - name: clang
+            os: ubuntu-latest
+            cc: clang
+            cxx: clang++
+          - name: msvc
+            os: windows-latest
+          - name: appleclang
+            os: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # The generator is left to CMake so the Windows runner picks up MSVC and the others pick
+      # up their default. -DBATHOLITH_NATIVE=OFF keeps the build portable across runners.
+      - name: Configure
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBATHOLITH_NATIVE=OFF
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure
+
+      # The viewer is Windows-only and the competitor subcommands need checkouts CI does not
+      # fetch, so the smoke run covers the two subcommands that always exist.
+      - name: Smoke
+        shell: bash
+        run: |
+          BIN=build/batholith
+          [ -f "$BIN" ] || BIN=build/Release/batholith.exe
+          "$BIN" --help
+          "$BIN" gen --chunks 64 --threads 2
+          "$BIN" bench --side 4 --threads 2 --repeats 1 --csv

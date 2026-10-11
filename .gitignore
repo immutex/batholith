@@ -1,0 +1,44 @@
+# Build output
+build/
+build-*/
+out/
+.cache/
+compile_commands.json
+.cmake-format.json
+
+# Editors and IDEs
+.vs/
+.vscode/
+.idea/
+*.user
+*.swp
+*~
+
+# Compiled objects and binaries
+*.o
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Cloned competitor sources, built by hand. See docs/competitors.md.
+third_party/
+
+# Cached vanilla worldgen JSON, fetched by tools/gen_router.py.
+.spec/
+
+# Raw benchmark output, except the CSVs the docs cite.
+*.csv
+!docs/bench/*.csv
+
+# Screenshots written by the viewer.
+*.ppm
+
+# Development-only configuration, not part of the project.
+AGENTS.md
+.agents/
