@@ -35,7 +35,7 @@ jobs:
             os: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # The generator is left to CMake so the Windows runner picks up MSVC and the others pick
       # up their default. -DBATHOLITH_NATIVE=OFF keeps the build portable across runners.
